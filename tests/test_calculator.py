@@ -5,416 +5,165 @@ Test suite for the Calculator class.
 import pytest
 from calculator.calculator import Calculator, InvalidInputException
 
+@pytest.fixture
 def calc():
     return Calculator()
 
-
 class TestAddition:
-    """Tests for the add method."""
 
-    def test_add_positive_numbers(self):
-        """Test adding two positive numbers."""
-        # Arrange
-        calc = Calculator()
-        a = 5
-        b = 3
-        expected = 8
+    def test_add_positive_numbers(self, calc):
+        assert calc.add(5, 3) == 8
 
-        # Act
-        result = calc.add(a, b)
+    def test_add_negative_numbers(self, calc):
+        assert calc.add(-5, -3) == -8
 
-        # Assert
-        assert result == expected
+    def test_add_positive_and_negative(self, calc):
+        assert calc.add(5, -3) == 2
 
-    def test_add_negative_numbers(self):
-        """Test adding two negative numbers."""
-        # Arrange
-        calc = Calculator()
-        a = -5
-        b = -3
-        expected = -8
+    def test_add_negative_and_positive(self, calc):
+        assert calc.add(-5, 3) == -2
 
-        # Act
-        result = calc.add(a, b)
+    def test_add_positive_with_zero(self, calc):
+        assert calc.add(5, 0) == 5
 
-        # Assert
-        assert result == expected
+    def test_add_zero_with_positive(self, calc):
+        assert calc.add(0, 5) == 5
 
-    def test_add_positive_and_negative(self):
-        """Test adding positive and negative numbers."""
-        # Arrange
-        calc = Calculator()
-        a = 5
-        b = -3
-        expected = 2
-
-        # Act
-        result = calc.add(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_add_negative_and_positive(self):
-        """Test adding negative and positive numbers."""
-        # Arrange
-        calc = Calculator()
-        a = -5
-        b = 3
-        expected = -2
-
-        # Act
-        result = calc.add(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_add_positive_with_zero(self):
-        """Test adding positive number with zero."""
-        # Arrange
-        calc = Calculator()
-        a = 5
-        b = 0
-        expected = 5
-
-        # Act
-        result = calc.add(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_add_zero_with_positive(self):
-        """Test adding zero with positive number."""
-        # Arrange
-        calc = Calculator()
-        a = 0
-        b = 5
-        expected = 5
-
-        # Act
-        result = calc.add(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_add_floats(self):
-        """Test adding floating point numbers."""
-        # Arrange
-        calc = Calculator()
-        a = 2.5
-        b = 3.7
-        expected = 6.2
-
-        # Act
-        result = calc.add(a, b)
-
-        # Assert
-        assert result == pytest.approx(expected)
+    def test_add_floats(self, calc):
+        assert calc.add(2.5, 3.7) == pytest.approx(6.2)
 
 
 class TestSubtraction:
-    """Tests for the subtract method."""
 
-    def test_subtract_positive_numbers(self):
-        """Test subtracting positive numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = 3
-        expected = 2
+    def test_subtract_positive_numbers(self, calc):
+        assert calc.subtract(5, 3) == 2
 
-        # Act
-        result = calc.subtract(a, b)
+    def test_subtract_negative_numbers(self, calc):
+        assert calc.subtract(-5, -3) == -2
 
-        # Assert
-        assert result == expected
+    def test_subtract_positive_and_negative(self, calc):
+        assert calc.subtract(5, -3) == 8
 
-    def test_subtract_negative_numbers(self):
-        """Test subtracting negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = -5
-        b = -3
-        expected = -2
+    def test_subtract_negative_and_positive(self, calc):
+        assert calc.subtract(-5, 3) == -8
 
-        # Act
-        result = calc.subtract(a, b)
+    def test_subtract_positive_with_zero(self, calc):
+        assert calc.subtract(5, 0) == 5
 
-        # Assert
-        assert result == expected
+    def test_subtract_zero_with_positive(self, calc):
+        assert calc.subtract(0, 5) == -5
 
-    def test_subtract_positive_and_negative(self):
-        """Test subtracting positive and negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = -3
-        expected = 8
+    def test_subtract_zero_with_negative(self, calc):
+        assert calc.subtract(0, -5) == 5
 
-        # Act
-        result = calc.subtract(a, b)
+    def test_subtract_floats(self, calc):
+        assert calc.subtract(2.5, 3.7) == pytest.approx(-1.2)
 
-        # Assert
-        assert result == expected
-
-    def test_subtract_negative_and_positive(self):
-        """Test subtracting negative and positive numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = -5
-        b = 3
-        expected = -8
-
-        # Act
-        result = calc.subtract(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_subtract_positive_with_zero(self):
-        """Test subtracting positive number with zero."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = 0
-        expected = 5
-
-        # Act
-        result = calc.subtract(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_subtract_zero_with_positive(self):
-        """Test subtracting zero with positive number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = 5
-        expected = -5
-
-        # Act
-        result = calc.subtract(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_subtract_zero_with_negative(self):
-        """Test subtracting zero with negative number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = -5
-        expected = 5
-
-        # Act
-        result = calc.subtract(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_subtract_floats(self):
-        """Test subtracting floating point numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 2.5
-        b = 3.7
-        expected = -1.2
-
-        # Act
-        result = calc.subtract(a, b)
-
-        # Assert
-        assert result == pytest.approx(expected)
 
 class TestMultiplication:
-    """Tests for the multiply method."""
 
-    def test_multiply_positive_numbers(self):
-        """Test multiplying positive numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = 3
-        expected = 15
-
-        # Act
-        result = calc.multiply(a, b)
-
-        # Assert
-        assert result == expected
+    def test_multiply_positive_numbers(self, calc):
+        assert calc.multiply(5, 3) == 15
     
-    def test_multiply_negative_numbers(self):
-        """Test multiplying negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = -5
-        b = -3
-        expected = 15
+    def test_multiply_negative_numbers(self, calc):
+        assert calc.multiply(-5, -3) == 15
 
-        # Act
-        result = calc.multiply(a, b)
+    def test_multiply_positive_and_negative(self, calc):
+        assert calc.multiply(5, -3) == -15
 
-        # Assert
-        assert result == expected
-
-    def test_multiply_positive_and_negative(self):
-        """Test multiplying positive and negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = -3
-        expected = -15
-
-        # Act
-        result = calc.multiply(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_multiply_negative_and_positive(self):
-        """Test multiplying negative and positive numbers."""
-        # TODO: Implement   
-        calc = Calculator()
-        a = -5
-        b = 3
-        expected = -15
-
-        # Act
-        result = calc.multiply(a, b)
-        # Assert
-        assert result == expected
+    def test_multiply_negative_and_positive(self, calc):
+        assert calc.multiply(-5, 3) == -15
     
-    def test_multiply_zero_with_positive(self):
-        """Test multiplying zero with positive number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = 5
-        expected = 0
+    def test_multiply_zero_with_positive(self, calc):
+        assert calc.multiply(0, 5) == 0
 
-        # Act
-        result = calc.multiply(a, b)
+    def test_multiply_zero_with_negative(self, calc):
+        assert calc.multiply(0, -5) == 0
 
-        # Assert
-        assert result == expected
+    def test_multiply_floats(self, calc):
+        assert calc.multiply(2.5, 3.7) == pytest.approx(9.25)
 
-
-    def test_multiply_zero_with_negative(self):
-        """Test multiplying zero with negative number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = -5
-        expected = 0
-
-        # Act
-        result = calc.multiply(a, b)
-
-        # Assert
-        assert result == expected
-
-    def test_multiply_floats(self):
-        """Test multiplying floating point numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 2.5
-        b = 3.7
-        expected = 9.25
-
-        # Act
-        result = calc.multiply(a, b)
-
-        # Assert
-        assert result == pytest.approx(expected)
 
 class TestDivision:
-    """Tests for the divide method."""
 
-    def test_divide_positive_numbers(self):
-            """Test dividing positive numbers."""
-            # TODO: Implement
-            calc = Calculator()
-            a = 5
-            b = 3
-            expected = 1.6666666666666667
+    def test_divide_positive_numbers(self, calc):
+        assert calc.divide(5, 3) == pytest.approx(1.6666666666666667)
 
-            # Act
-            result = calc.divide(a, b)
+    def test_divide_negative_numbers(self, calc):
+        assert calc.divide(-5, -3) == pytest.approx(1.6666666666666667)
 
-            # Assert
-            assert result == expected
-    def test_divide_negative_numbers(self):
-        """Test dividing negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = -5
-        b = -3
-        expected = 1.6666666666666667
+    def test_divide_positive_and_negative(self, calc):
+        assert calc.divide(5, -3) == pytest.approx(-1.6666666666666667)
 
-        # Act
-        result = calc.divide(a, b)  
+    def test_divide_negative_and_positive(self, calc):
+        assert calc.divide(-5, 3) == pytest.approx(-1.6666666666666667)
 
-        # Assert
-        assert result == expected
+    def test_divide_zero_with_positive(self, calc):
+        assert calc.divide(0, 5) == 0
 
-    def test_divide_positive_and_negative(self):
-        """Test dividing positive and negative numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 5
-        b = -3
-        expected = -1.6666666666666667
+    def test_divide_zero_with_negative(self, calc):
+        assert calc.divide(0, -5) == 0
 
-        # Act
-        result = calc.divide(a, b)
-        # Assert
-        assert result == expected
+    def test_divide_floats(self, calc):
+        assert calc.divide(2.5, 3.7) == pytest.approx(0.6756756756756757)
 
-    def test_divide_negative_and_positive(self):
-        """Test dividing negative and positive numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = -5
-        b = 3
-        expected = -1.6666666666666667
-        # Act
-        result = calc.divide(a, b)
-        # Assert
-        assert result == expected
-
-    def test_divide_zero_with_positive(self):
-        """Test dividing zero with positive number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = 5
-        expected = 0
-        # Act
-        result = calc.divide(a, b)
-        # Assert
-        assert result == expected       
-
-    def test_divide_zero_with_negative(self):
-        """Test dividing zero with negative number."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 0
-        b = -5
-        expected = 0
-        # Act
-        result = calc.divide(a, b)
-        # Assert
-        assert result == expected
+    def test_divide_by_zero(self, calc):
+        with pytest.raises(ZeroDivisionError):
+            calc.divide(10, 0)
 
 
-    def test_divide_floats(self):
-        """Test dividing floating point numbers."""
-        # TODO: Implement
-        calc = Calculator()
-        a = 2.5
-        b = 3.7
-        expected = 0.6756756756756757
-        # Act
-        result = calc.divide(a, b)
-        # Assert
-        assert result == pytest.approx(expected)
+
+class TestInvalidInputs:
+    def test_add_input_too_large(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.add(1000001, 1)
+
+    def test_add_input_too_small(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.add(-1000001, 1)
+
+    def test_add_invalid_second_argument(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.add(1, 1000001)
+
+    def test_subtract_input_too_large(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.subtract(1000001, 1)
+
+    def test_subtract_invalid_second_argument(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.subtract(1, -1000001)
+
+    def test_multiply_input_too_large(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.multiply(1000001, 1)
+
+    def test_multiply_invalid_second_argument(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.multiply(1, 1000001)
+
+
+    def test_divide_input_too_large(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.divide(1000001, 1)
+
+    def test_divide_invalid_second_argument(self, calc):
+
+        with pytest.raises(InvalidInputException):
+            calc.divide(1, 1000001)
+
+class TestBoundaries:
+
+    def test_boundary_max_value(self, calc):
+        assert calc.add(1000000, 0) == 1000000
+
+    def test_boundary_min_value(self, calc):
+        assert calc.add(-1000000, 0) == -1000000
+
+    def test_boundary_just_above_max(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.add(1000001, 0)
+
+    def test_boundary_just_below_min(self, calc):
+        with pytest.raises(InvalidInputException):
+            calc.add(-1000001, 0)
